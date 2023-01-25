@@ -31,6 +31,11 @@ RUN wget https://dl.google.com/android/repository/commandlinetools-linux-9123335
 RUN wget https://moreficent-oda-binary.s3.ap-south-1.amazonaws.com/${oda_version}/oda_linux_x64 -O oda \
   && chmod +x oda
 
+# jq setup
+RUN wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O jq \
+  && chmod +x jq
+
 FROM ${base_img}
 
 COPY --from=setup /home/eru /setup
+ADD dunebox_configure.sh dunebox_start.sh dunebox_start_impl.sh dunebox_terminate.sh /scripts/
